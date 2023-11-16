@@ -8,6 +8,10 @@ export const authApi = createApi({
   }),
 
   endpoints: (builder) => ({
+    /**
+     * Login endpoint
+     * @param {object} body - {email, password}
+     */
     login: builder.mutation({
       query: (body) => ({
         url: '/users/login',
@@ -16,14 +20,16 @@ export const authApi = createApi({
       }),
     }),
 
+    /**
+     * Logout endpoint
+     * @param {string} token - access token
+     */
     logout: builder.query({
       query: (token) => ({
         url: '/users/logout?access_token=' + token,
         method: 'POST',
       }),
     }),
-
-    
   }),
 });
 
