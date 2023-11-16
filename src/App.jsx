@@ -1,4 +1,9 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+  useLocation,
+} from 'react-router-dom';
 import { Header } from './components/Header';
 import { Container } from 'react-bootstrap';
 import { Home } from './components/Home';
@@ -7,9 +12,11 @@ import { Register } from './auth/register';
 import { MissingRoute } from './components/MissingRoute';
 import { Dashboard } from './components/Dashboard';
 import { Unauthorized } from './components/Unauthorized';
+import { useSelector } from 'react-redux';
+import { Logout } from './auth/Logout';
 
 const LayoutOutlet = ({ children }) => {
-  const isAuthenticated = false;
+  const { isAuthenticated } = useSelector((state) => state.auth);
   return (
     <>
       <Header isAuthenticated={isAuthenticated} />
@@ -19,8 +26,18 @@ const LayoutOutlet = ({ children }) => {
 };
 
 const ProtectedOutlet = ({ children }) => {
-  const isAuthenticated = false;
-  return isAuthenticated ? children : <Unauthorized />;
+  const { isAuthenticated, token } = useSelector((state) => state.auth);
+  return isAuthenticated && token?.id ? children : <Unauthorized />;
+};
+
+const AuthOutlet = ({ children }) => {
+  const location = useLocation();
+  const { isAuthenticated, token } = useSelector((state) => state.auth);
+  return isAuthenticated && token?.id ? (
+    <Navigate to="/" state={{ from: location }} replace />
+  ) : (
+    children
+  );
 };
 
 const BrowserRouter = createBrowserRouter([
@@ -35,9 +52,11 @@ const BrowserRouter = createBrowserRouter([
   },
   {
     element: (
-      <LayoutOutlet>
-        <Login />
-      </LayoutOutlet>
+      <AuthOutlet>
+        <LayoutOutlet>
+          <Login />
+        </LayoutOutlet>
+      </AuthOutlet>
     ),
     path: '/login',
     errorElement: <MissingRoute />,
@@ -49,6 +68,15 @@ const BrowserRouter = createBrowserRouter([
       </LayoutOutlet>
     ),
     path: '/register',
+    errorElement: <MissingRoute />,
+  },
+  {
+    element: (
+      <LayoutOutlet>
+        <Logout />
+      </LayoutOutlet>
+    ),
+    path: '/logout',
     errorElement: <MissingRoute />,
   },
   {

@@ -1,8 +1,10 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/react.svg';
+import { useSelector } from 'react-redux';
 
 export function Header({ isAuthenticated }) {
+  const { ping } = useSelector((state) => state.auth);
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
@@ -15,7 +17,7 @@ export function Header({ isAuthenticated }) {
               height="30"
               className="d-inline-block align-top me-2"
             />{' '}
-            RTK-HAPP
+            RTK-HAPP: {ping}
           </Link>
         </Navbar.Brand>
         <Nav className="me-auto">

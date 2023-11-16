@@ -1,7 +1,15 @@
 import { Button, Form, FormControl } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useLoginMutation } from './core/api';
+
+/*
+"email": "admin@zone-edv.de",
+"password": "1"
+*/
 
 export const Login = () => {
+  const navigate = useNavigate();
+  const [loginMethod, { isLoading }] = useLoginMutation();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -10,6 +18,18 @@ export const Login = () => {
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    const user = {
+      email: data.get('email'),
+      password: data.get('password'),
+    };
+
+    try {
+      await loginMethod(user).unwrap();
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -35,7 +55,10 @@ export const Login = () => {
           <FormControl type="password" name="password" placeholder="Enter Password.." />
         </div>
         <div className="d-grid my-4">
-          <Button type="submit">Login</Button>
+          {isLoading && <p>Logging in...</p>}
+          <Button type="submit" disabled={isLoading}>
+            Login
+          </Button>
         </div>
         <p className="mb-0">
           Dont have an account?{' '}
