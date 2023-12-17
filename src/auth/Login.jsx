@@ -1,6 +1,9 @@
 import { Button, Form, FormControl } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from './core/api';
+import { useDispatch } from 'react-redux';
+import { loginAction } from './core/thunk';
+import { loginSagaDispatched } from './core/slice';
 
 /*
 "email": "admin@zone-edv.de",
@@ -8,7 +11,10 @@ import { useLoginMutation } from './core/api';
 */
 
 export const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  //* RTK-QUERY HOOK FOR LOGIN
   const [loginMethod, { isLoading }] = useLoginMutation();
 
   const handleSubmit = async (event) => {
@@ -20,8 +26,15 @@ export const Login = () => {
       password: data.get('password'),
     };
 
+    //* THUNK ACTION
+    // dispatch(loginAction(user));
+
+    //* SAGA ACTION
+    // dispatch(loginSagaDispatched(user));
+
+    //* RTK-QUERY ACTION
     try {
-      await loginMethod(user).unwrap();
+      await loginMethod(user);
       navigate('/');
     } catch (error) {
       console.error(error);

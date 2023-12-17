@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { authApi } from './api';
+import { loginAction } from './thunk';
 
 const initialState = {
   user: null,
@@ -22,16 +23,47 @@ const authSlice = createSlice({
     decrementPingMethod: (state, action) => {
       state.ping = state.ping - action.payload;
     },
+
+    // SAGA CASES FOR LOGIN
+    loginSagaDispatched: (state) => {
+      state.isLoading = true;
+    },
+    loginSagaFulfilled: (state, action) => {
+      state.isLoading = false;
+      state.isAuthenticated = true;
+      state.user = action.payload;
+    },
+    loginSagaRejected: (state) => {
+      state.isLoading = false;
+    },
+    
+    // SAGA CASES FOR LOGOUT
+    logoutSagaDispatched: (state) => {
+      state.isLoading = true;
+    },
+    logoutSagaFulfilled: (state) => {
+      state.isLoading = false;
+      state.isAuthenticated = false;
+      state.user = null;
+    },
+    logoutSagaRejected: (state) => {
+      state.isLoading = false;
+    },
   },
 
   extraReducers: (builder) => {
-    // login api matchers
-    builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
+    // LOGIN CASES FOR THUNK
+    builder.addMatcher(loginAction.fulfilled, (state, action) => {
       state.token = action.payload;
       state.isAuthenticated = true;
     });
 
-    // logout api matchers
+    // login api matchers for RTK-QUERY
+    builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
+      state.token = action.payload;
+      state.isAuthenticated = true;
+    });
+    // logout api matchers for RTK-QUERY
     builder.addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
       state.token = null;
       state.isAuthenticated = false;
@@ -44,6 +76,15 @@ const authSlice = createSlice({
 });
 
 // export actions
-export const { pingMethod, decrementPingMethod } = authSlice.actions;
+export const {
+  pingMethod,
+  decrementPingMethod,
+  loginSagaFulfilled,
+  loginSagaDispatched,
+  loginSagaRejected,
+  logoutSagaDispatched,
+  logoutSagaFulfilled,
+  logoutSagaRejected,
+} = authSlice.actions;
 
 export default authSlice.reducer;
