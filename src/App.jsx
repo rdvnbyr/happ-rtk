@@ -10,8 +10,8 @@ import { Home } from './components/Home';
 import { Login } from './auth/Login';
 import { Register } from './auth/register';
 import { MissingRoute } from './components/MissingRoute';
-import { Dashboard } from './components/Dashboard';
-import { Unauthorized } from './components/Unauthorized';
+import { Dashboard } from './pages/dashboard/Dashboard';
+// import { Unauthorized } from './components/Unauthorized';
 import { useSelector } from 'react-redux';
 import { Logout } from './auth/Logout';
 import { ReactDataTable } from './components/ReactDataTable';
@@ -26,10 +26,10 @@ const LayoutOutlet = ({ children }) => {
   );
 };
 
-const ProtectedOutlet = ({ children }) => {
-  const { isAuthenticated, token } = useSelector((state) => state.auth);
-  return isAuthenticated && token?.id ? children : <Unauthorized />;
-};
+// const ProtectedOutlet = ({ children }) => {
+//   const { isAuthenticated, token } = useSelector((state) => state.auth);
+//   return isAuthenticated && token?.id ? children : <Unauthorized />;
+// };
 
 const AuthOutlet = ({ children }) => {
   const location = useLocation();
@@ -82,11 +82,11 @@ const BrowserRouter = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedOutlet>
+      <>
         <LayoutOutlet>
           <Dashboard />
         </LayoutOutlet>
-      </ProtectedOutlet>
+      </>
     ),
     path: '/dashboard',
     errorElement: <MissingRoute />,

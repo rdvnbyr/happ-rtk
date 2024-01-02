@@ -33,8 +33,9 @@ export const columns = [
     sortable: false,
     selector: 'null',
     cell: (d) => [
-      <button key={`${d.title}2`} onClick={handleClick.bind(this, d.title)} className="btn btn-sm btn-secondary me-2">edit</button>,
-      <button key={`${d.title}3`} onClick={handleClick.bind(this, d.title)} className="btn btn-sm btn-danger">delete</button>
+      <button key={`${d.title}3`} onClick={handleClick.bind(this, d.title)} className="btn btn-sm btn-info">Info</button>
+/*       <button key={`${d.title}2`} onClick={handleClick.bind(this, d.title)} className="btn btn-sm btn-secondary me-2">edit</button>,
+      <button key={`${d.title}3`} onClick={handleClick.bind(this, d.title)} className="btn btn-sm btn-danger">delete</button> */
     ],
   },
 ];
