@@ -14,6 +14,7 @@ import { Dashboard } from './components/Dashboard';
 import { Unauthorized } from './components/Unauthorized';
 import { useSelector } from 'react-redux';
 import { Logout } from './auth/Logout';
+import { ReactDataTable } from './components/ReactDataTable';
 
 const LayoutOutlet = ({ children }) => {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -99,6 +100,15 @@ const BrowserRouter = createBrowserRouter([
     path: '/unauthorized',
     errorElement: <MissingRoute />,
   },
+  {
+    element: (
+      <LayoutOutlet>
+        <ReactDataTable />
+      </LayoutOutlet>
+    ),
+    path: '/datatable',
+    errorElement: <MissingRoute />,
+  }
 ]);
 
 function App() {

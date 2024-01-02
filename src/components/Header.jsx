@@ -26,6 +26,11 @@ export function Header({ isAuthenticated }) {
               Dashboard
             </Link>
           </li>
+          <li className="nav-item">
+            <Link to="/datatable" className="nav-link">
+              DataTable
+            </Link>
+          </li>
           {isAuthenticated ? (
             <li className="nav-item">
               <Link to="/logout" className="nav-link">
