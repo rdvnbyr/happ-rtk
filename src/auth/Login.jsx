@@ -17,6 +17,7 @@ const INPUTS = [
     type: 'email',
     name: 'email',
     placeholder: 'Enter Email..',
+    autoFocus: true,
   },
   {
     label: 'Password',
@@ -44,11 +45,16 @@ export const Login = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('E-mail is not valid!').required('E-mail is required!'),
+    email: Yup.string()
+      .max(255, 'E-mail has to be shorter than 255 characters!')
+      .email('E-mail is not valid!')
+      .required('E-mail is required!'),
     password: Yup.string()
+      .trim("Password can't start or end with whitespace!")
+      .strict(true)
       .min(4, 'Password has to be longer than 6 characters!')
       .max(12, 'Password has to be shorter than 50 characters!')
-      .required('Password is required!')
+      .required('Password is required!'),
   });
 
   return (
@@ -62,7 +68,7 @@ export const Login = () => {
         {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
           <form
             onSubmit={handleSubmit}
-            style={{ maxWidth: '100%', width: '32rem' }}
+            style={{ maxWidth: '100%', width: '28rem' }}
             className="border p-4 rounded"
           >
             <div className="text-center mb-4">
