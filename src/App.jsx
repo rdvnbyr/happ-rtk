@@ -108,7 +108,7 @@ const BrowserRouter = createBrowserRouter([
     ),
     path: '/datatable',
     errorElement: <MissingRoute />,
-  }
+  },
 ]);
 
 function App() {

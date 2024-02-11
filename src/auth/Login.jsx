@@ -1,81 +1,106 @@
-import { Button, Form, FormControl } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from './core/api';
-import { useDispatch } from 'react-redux';
-import { loginAction } from './core/thunk';
-import { loginSagaDispatched } from './core/slice';
+import { FormControlContainer } from '../components';
+import { useId } from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 /*
 "email": "admin@zone-edv.de",
 "password": "1"
 */
 
+const INPUTS = [
+  {
+    label: 'Email',
+    type: 'email',
+    name: 'email',
+    placeholder: 'Enter Email..',
+  },
+  {
+    label: 'Password',
+    type: 'password',
+    name: 'password',
+    placeholder: 'Enter Password..',
+  },
+];
+
 export const Login = () => {
-  const dispatch = useDispatch();
+  const gid = useId();
   const navigate = useNavigate();
 
   //* RTK-QUERY HOOK FOR LOGIN
   const [loginMethod, { isLoading }] = useLoginMutation();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
+  const onSubmitHandler = async (values) => {
     const user = {
-      email: data.get('email'),
-      password: data.get('password'),
+      email: values.email,
+      password: values.password,
     };
 
-    //* THUNK ACTION
-    // dispatch(loginAction(user));
-
-    //* SAGA ACTION
-    // dispatch(loginSagaDispatched(user));
-
-    //* RTK-QUERY ACTION
-    try {
-      await loginMethod(user);
-      navigate('/');
-    } catch (error) {
-      console.error(error);
-    }
+    await loginMethod(user);
+    navigate('/');
   };
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('E-mail is not valid!').required('E-mail is required!'),
+    password: Yup.string()
+      .min(4, 'Password has to be longer than 6 characters!')
+      .max(12, 'Password has to be shorter than 50 characters!')
+      .required('Password is required!')
+  });
 
   return (
     <div className="row justify-content-center p-4">
-      <Form
-        onSubmit={handleSubmit}
-        style={{ maxWidth: '100%', width: '32rem' }}
-        className="border p-4 rounded"
+      {/* formik */}
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        onSubmit={(values) => onSubmitHandler(values)}
+        validationSchema={validationSchema}
       >
-        <div className="text-center mb-4">
-          <h1 className="mb-4 text-primary">Login</h1>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <FormControl type="text" name="email" placeholder="Enter Email.." />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Password
-          </label>
-          <FormControl type="password" name="password" placeholder="Enter Password.." />
-        </div>
-        <div className="d-grid my-4">
-          {isLoading && <p>Logging in...</p>}
-          <Button type="submit" disabled={isLoading}>
-            Login
-          </Button>
-        </div>
-        <p className="mb-0">
-          Dont have an account?{' '}
-          <Link to="/register" className="text-primary text-decoration-none">
-            Register
-          </Link>
-        </p>
-      </Form>
+        {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
+          <form
+            onSubmit={handleSubmit}
+            style={{ maxWidth: '100%', width: '32rem' }}
+            className="border p-4 rounded"
+          >
+            <div className="text-center mb-4">
+              <h2 className="text-primary">Login</h2>
+              <p className="text-muted">Login to your account</p>
+            </div>
+            {INPUTS.map((row) => (
+              <div className="mb-3" key={`${gid}__${row.name}`}>
+                <FormControlContainer
+                  {...row}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values[row.name]}
+                  errors={errors[row.name] && touched[row.name] && errors[row.name]}
+                />
+              </div>
+            ))}
+            <div className="d-grid my-4">
+              <Button type="submit" disabled={isLoading}>
+                Login
+                {isLoading && (
+                  <span
+                    className="ms-2 spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                )}
+              </Button>
+            </div>
+            <p className="mb-0">
+              Dont have an account?{' '}
+              <Link to="/register" className="text-primary text-decoration-none">
+                Register
+              </Link>
+            </p>
+          </form>
+        )}
+      </Formik>
     </div>
   );
 };

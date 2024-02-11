@@ -5,8 +5,6 @@ export const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // make it better
   };
 
   return (
