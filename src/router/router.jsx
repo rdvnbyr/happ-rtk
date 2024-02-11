@@ -8,7 +8,7 @@ import { Logout } from '../auth/Logout';
 import { ReactDataTable } from '../components/ReactDataTable';
 import { AuthLayout, MainLayout, ProtectedLayout } from './layouts';
 
-export const BrowserRouter = createBrowserRouter([
+const BrowserRouter = createBrowserRouter([
   {
     element: (
       <MainLayout>
@@ -21,9 +21,7 @@ export const BrowserRouter = createBrowserRouter([
   {
     element: (
       <AuthLayout>
-        <MainLayout>
-          <Login />
-        </MainLayout>
+        <Login />
       </AuthLayout>
     ),
     path: '/login',
@@ -66,3 +64,5 @@ export const BrowserRouter = createBrowserRouter([
     errorElement: <MissingRoute />,
   },
 ]);
+
+export default BrowserRouter;

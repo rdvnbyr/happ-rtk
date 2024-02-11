@@ -30,7 +30,10 @@ const AuthLayout = ({ children }) => {
   return isAuthenticated && token?.id ? (
     <Navigate to="/" state={{ from: location }} replace />
   ) : (
-    children
+    <Fragment>
+      <Header isAuthenticated={isAuthenticated} />
+      <Container className="my-4">{children}</Container>
+    </Fragment>
   );
 };
 
