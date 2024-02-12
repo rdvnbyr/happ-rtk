@@ -7,6 +7,7 @@ import { Dashboard } from '../pages/dashboard/Dashboard';
 import { Logout } from '../auth/Logout';
 import { ReactDataTable } from '../components/ReactDataTable';
 import { AuthLayout, MainLayout, ProtectedLayout } from './layouts';
+import { StepForm } from '../pages/step-form/StepFormExample';
 
 const BrowserRouter = createBrowserRouter([
   {
@@ -61,6 +62,15 @@ const BrowserRouter = createBrowserRouter([
       </MainLayout>
     ),
     path: '/datatable',
+    errorElement: <MissingRoute />,
+  },
+  {
+    element: (
+      <MainLayout>
+        <StepForm />
+      </MainLayout>
+    ),
+    path: '/stepform',
     errorElement: <MissingRoute />,
   },
 ]);

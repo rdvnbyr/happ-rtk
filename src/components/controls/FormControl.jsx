@@ -32,7 +32,6 @@ FormCheckbox.displayName = 'FormCheckbox'; // Add displayName property
 
 const FormControlContainer = forwardRef(function (props, ref) {
   const id = props?.id || `${props?.name}-${uuidv4()}`;
-  console.log('props', props);
   return (
     <div className="form-group">
       <label htmlFor={id} className="form-label">
