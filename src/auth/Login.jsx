@@ -53,7 +53,7 @@ export const Login = () => {
       .trim("Password can't start or end with whitespace!")
       .strict(true)
       .min(4, 'Password has to be longer than 6 characters!')
-      .max(12, 'Password has to be shorter than 50 characters!')
+      .max(12, 'Password has to be shorter than 12 characters!')
       .required('Password is required!'),
   });
 
@@ -62,7 +62,9 @@ export const Login = () => {
       {/* formik */}
       <Formik
         initialValues={{ email: '', password: '' }}
-        onSubmit={(values) => onSubmitHandler(values)}
+        onSubmit={(values) => {
+          onSubmitHandler(values);
+        }}
         validationSchema={validationSchema}
       >
         {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
