@@ -1,12 +1,12 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { Home } from '../components/Home';
-import { Login } from '../auth/Login';
-import { Register } from '../auth/register';
-import { MissingRoute } from '../components/MissingRoute';
-import { Dashboard } from '../pages/dashboard/Dashboard';
-import { Logout } from '../auth/Logout';
-import { ReactDataTable } from '../components/ReactDataTable';
-import { AuthLayout, MainLayout, ProtectedLayout } from './layouts';
+import {createBrowserRouter} from 'react-router-dom';
+import {Home} from '../components/Home';
+import {Login} from '../auth/Login';
+import {Register} from '../auth/register';
+import {MissingRoute} from '../components/MissingRoute';
+import {Dashboard} from '../pages/dashboard/Dashboard';
+import {Logout} from '../auth/Logout';
+import {ReactDataTable} from '../components/ReactDataTable';
+import {AuthLayout, MainLayout, ProtectedLayout} from './layouts';
 
 const BrowserRouter = createBrowserRouter([
   {

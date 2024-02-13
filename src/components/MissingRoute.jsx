@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 export function MissingRoute() {
@@ -13,7 +13,6 @@ export function MissingRoute() {
     </StyledMissingRoutePage>
   );
 }
-
 
 const StyledMissingRoutePage = styled.div`
   height: 100vh;

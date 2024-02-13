@@ -1,11 +1,11 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PROD_API_URL } from '../../lib/constants';
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import {PROD_API_URL} from '../../lib/constants';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
     baseUrl: PROD_API_URL,
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: (headers, {getState}) => {
       const token = getState().auth.token;
       if (token) {
         headers.set('authorization', `Bearer ${token?.id}`);
@@ -14,13 +14,13 @@ export const authApi = createApi({
     },
   }),
 
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     /**
      * Login endpoint
      * @param {object} body - {email, password}
      */
     login: builder.mutation({
-      query: (body) => ({
+      query: body => ({
         url: '/users/login',
         method: 'POST',
         body: body,
@@ -32,7 +32,7 @@ export const authApi = createApi({
      * @param {string} token - access token
      */
     logout: builder.query({
-      query: (token) => ({
+      query: token => ({
         url: '/users/logout?access_token=' + token,
         method: 'POST',
       }),
@@ -41,4 +41,4 @@ export const authApi = createApi({
 });
 
 // export actions
-export const { useLoginMutation, useLogoutQuery } = authApi;
+export const {useLoginMutation, useLogoutQuery} = authApi;

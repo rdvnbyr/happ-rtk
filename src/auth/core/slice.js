@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { authApi } from './api';
+import {createSlice} from '@reduxjs/toolkit';
+import {authApi} from './api';
 
 const initialState = {
   user: null,
@@ -15,7 +15,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    pingMethod: (state) => {
+    pingMethod: state => {
       state.ping = state.ping + 1;
     },
 
@@ -24,14 +24,14 @@ const authSlice = createSlice({
     },
   },
 
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     // login api matchers for RTK-QUERY
     builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
       state.token = action.payload;
       state.isAuthenticated = true;
     });
     // logout api matchers for RTK-QUERY
-    builder.addMatcher(authApi.endpoints.logout.matchPending, (state) => {
+    builder.addMatcher(authApi.endpoints.logout.matchPending, state => {
       state.token = null;
       state.isAuthenticated = false;
     });
@@ -39,6 +39,6 @@ const authSlice = createSlice({
 });
 
 // export actions
-export const { pingMethod, decrementPingMethod } = authSlice.actions;
+export const {pingMethod, decrementPingMethod} = authSlice.actions;
 
 export default authSlice.reducer;

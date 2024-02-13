@@ -1,12 +1,12 @@
-import { Fragment } from 'react';
-import { useSelector } from 'react-redux';
-import { Header } from '../components/Header';
-import { Container } from 'react-bootstrap';
-import { Unauthorized } from '../components/Unauthorized';
-import { Navigate, useLocation } from 'react-router-dom';
+import {Fragment} from 'react';
+import {useSelector} from 'react-redux';
+import {Header} from '../components/Header';
+import {Container} from 'react-bootstrap';
+import {Unauthorized} from '../components/Unauthorized';
+import {Navigate, useLocation} from 'react-router-dom';
 
-const MainLayout = ({ children }) => {
-  const { isAuthenticated } = useSelector((state) => state.auth);
+const MainLayout = ({children}) => {
+  const {isAuthenticated} = useSelector(state => state.auth);
   return (
     <Fragment>
       <Header isAuthenticated={isAuthenticated} />
@@ -15,20 +15,16 @@ const MainLayout = ({ children }) => {
   );
 };
 
-const ProtectedLayout = ({ children }) => {
-  const { isAuthenticated, token } = useSelector((state) => state.auth);
-  return isAuthenticated && token?.id ? (
-    <MainLayout>{children}</MainLayout>
-  ) : (
-    <Unauthorized />
-  );
+const ProtectedLayout = ({children}) => {
+  const {isAuthenticated, token} = useSelector(state => state.auth);
+  return isAuthenticated && token?.id ? <MainLayout>{children}</MainLayout> : <Unauthorized />;
 };
 
-const AuthLayout = ({ children }) => {
+const AuthLayout = ({children}) => {
   const location = useLocation();
-  const { isAuthenticated, token } = useSelector((state) => state.auth);
+  const {isAuthenticated, token} = useSelector(state => state.auth);
   return isAuthenticated && token?.id ? (
-    <Navigate to="/" state={{ from: location }} replace />
+    <Navigate to="/" state={{from: location}} replace />
   ) : (
     <Fragment>
       <Header isAuthenticated={isAuthenticated} />
@@ -37,4 +33,4 @@ const AuthLayout = ({ children }) => {
   );
 };
 
-export { MainLayout, ProtectedLayout, AuthLayout };
+export {MainLayout, ProtectedLayout, AuthLayout};

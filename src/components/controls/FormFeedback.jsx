@@ -1,4 +1,4 @@
-export const FormFeedback = ({ children }) => {
+export const FormFeedback = ({children}) => {
   return (
     <div
       style={{

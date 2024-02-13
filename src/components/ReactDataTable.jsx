@@ -6,7 +6,7 @@ import '../assets/css/table.css';
 // A super simple expandable component.
 // const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
 
-import { columns, data } from '../lib/mock-table-data';
+import {columns, data} from '../lib/mock-table-data';
 
 export const ReactDataTable = () => {
   const tableData = {
@@ -15,9 +15,9 @@ export const ReactDataTable = () => {
   };
 
   // data provides access to your row data
-  const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
+  const ExpandedComponent = ({data}) => <pre>{JSON.stringify(data, null, 2)}</pre>;
 
-  const handleChange = ({ selectedRows }) => {
+  const handleChange = ({selectedRows}) => {
     // You can set state or dispatch with something like Redux so we can use the retrieved data
     console.log('Selected Rows: ', selectedRows);
   };

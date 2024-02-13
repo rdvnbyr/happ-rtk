@@ -1,4 +1,4 @@
-import { ThemeProvider, css } from 'styled-components';
+import {ThemeProvider, css} from 'styled-components';
 import theme from 'styled-theming';
 
 const colors = {
@@ -28,9 +28,9 @@ theme.variants(
   'mode',
   'variant',
   Object.keys(colors).reduce((acc, color) => {
-    acc[color] = { light: colors[color], dark: colors[color] };
+    acc[color] = {light: colors[color], dark: colors[color]};
     return acc;
-  }, {})
+  }, {}),
 );
 
 theme('spacing', {
@@ -45,10 +45,10 @@ theme('font', {
   monoSpaced: 'Consolas, monaco, monospace',
 });
 
-export default function StyledTheme({ children }) {
+export default function StyledTheme({children}) {
   // detect user's system preferences
   const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const mode = prefersDarkMode ? 'dark' : 'light';
 
-  return <ThemeProvider theme={{ mode }}>{children}</ThemeProvider>;
+  return <ThemeProvider theme={{mode}}>{children}</ThemeProvider>;
 }

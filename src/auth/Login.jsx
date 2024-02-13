@@ -1,9 +1,9 @@
-import { Button } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import { useLoginMutation } from './core/api';
-import { FormControlContainer } from '../components';
-import { useId } from 'react';
-import { Formik } from 'formik';
+import {Button} from 'react-bootstrap';
+import {Link, useNavigate} from 'react-router-dom';
+import {useLoginMutation} from './core/api';
+import {FormControlContainer} from '../components';
+import {useId} from 'react';
+import {Formik} from 'formik';
 import * as Yup from 'yup';
 
 /*
@@ -32,9 +32,9 @@ export const Login = () => {
   const navigate = useNavigate();
 
   //* RTK-QUERY HOOK FOR LOGIN
-  const [loginMethod, { isLoading }] = useLoginMutation();
+  const [loginMethod, {isLoading}] = useLoginMutation();
 
-  const onSubmitHandler = async (values) => {
+  const onSubmitHandler = async values => {
     const user = {
       email: values.email,
       password: values.password,
@@ -45,10 +45,7 @@ export const Login = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .max(255, 'E-mail has to be shorter than 255 characters!')
-      .email('E-mail is not valid!')
-      .required('E-mail is required!'),
+    email: Yup.string().max(255, 'E-mail has to be shorter than 255 characters!').email('E-mail is not valid!').required('E-mail is required!'),
     password: Yup.string()
       .trim("Password can't start or end with whitespace!")
       .strict(true)
@@ -61,23 +58,19 @@ export const Login = () => {
     <div className="row justify-content-center p-4">
       {/* formik */}
       <Formik
-        initialValues={{ email: '', password: '' }}
-        onSubmit={(values) => {
+        initialValues={{email: '', password: ''}}
+        onSubmit={values => {
           onSubmitHandler(values);
         }}
         validationSchema={validationSchema}
       >
-        {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
-          <form
-            onSubmit={handleSubmit}
-            style={{ maxWidth: '100%', width: '28rem' }}
-            className="border p-4 rounded"
-          >
+        {({values, errors, touched, handleChange, handleBlur, handleSubmit}) => (
+          <form onSubmit={handleSubmit} style={{maxWidth: '100%', width: '28rem'}} className="border p-4 rounded">
             <div className="text-center mb-4">
               <h2 className="text-primary">Login</h2>
               <p className="text-muted">Login to your account</p>
             </div>
-            {INPUTS.map((row) => (
+            {INPUTS.map(row => (
               <div className="mb-3" key={`${gid}__${row.name}`}>
                 <FormControlContainer
                   {...row}
@@ -91,13 +84,7 @@ export const Login = () => {
             <div className="d-grid my-4">
               <Button type="submit" disabled={isLoading}>
                 Login
-                {isLoading && (
-                  <span
-                    className="ms-2 spinner-border spinner-border-sm"
-                    role="status"
-                    aria-hidden="true"
-                  ></span>
-                )}
+                {isLoading && <span className="ms-2 spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
               </Button>
             </div>
             <p className="mb-0">

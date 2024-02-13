@@ -1,23 +1,16 @@
-import { Container, Nav, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import {Container, Nav, Navbar} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import Logo from '../assets/react.svg';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 
-export function Header({ isAuthenticated }) {
-  const { ping } = useSelector((state) => state.auth);
+export function Header({isAuthenticated}) {
+  const {ping} = useSelector(state => state.auth);
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
         <Navbar.Brand>
           <Link to="/" className="nav-link">
-            <img
-              alt=""
-              src={Logo}
-              width="30"
-              height="30"
-              className="d-inline-block align-top me-2"
-            />{' '}
-            RTK-HAPP: {ping}
+            <img alt="" src={Logo} width="30" height="30" className="d-inline-block align-top me-2" /> RTK-HAPP: {ping}
           </Link>
         </Navbar.Brand>
         <Nav className="me-auto">

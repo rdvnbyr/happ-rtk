@@ -1,6 +1,6 @@
-import { CardHeader } from 'react-bootstrap';
+import {CardHeader} from 'react-bootstrap';
 
-const DashboardCardHeader = ({ title }) => {
+const DashboardCardHeader = ({title}) => {
   return (
     <CardHeader className="card-header">
       <h3 className="card-title">{title}</h3>

@@ -1,32 +1,16 @@
-import { forwardRef } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { FormFeedback } from './FormFeedback';
+import {forwardRef} from 'react';
+import {v4 as uuidv4} from 'uuid';
+import {FormFeedback} from './FormFeedback';
 
 const FormControl = forwardRef((props, ref) => {
-  const { type, id, ...restProps } = props;
-  return (
-    <input
-      className="form-control shadow-none m-0"
-      type={type || 'text'}
-      ref={ref}
-      id={id}
-      {...restProps}
-    />
-  );
+  const {type, id, ...restProps} = props;
+  return <input className="form-control shadow-none m-0" type={type || 'text'} ref={ref} id={id} {...restProps} />;
 });
 FormControl.displayName = 'FormControl';
 
 const FormCheckbox = forwardRef((props, ref) => {
-  const { id, ...restProps } = props;
-  return (
-    <input
-      className="form-check-input"
-      type={'checkbox'}
-      ref={ref}
-      id={id}
-      {...restProps}
-    />
-  );
+  const {id, ...restProps} = props;
+  return <input className="form-check-input" type={'checkbox'} ref={ref} id={id} {...restProps} />;
 });
 FormCheckbox.displayName = 'FormCheckbox'; // Add displayName property
 
@@ -59,4 +43,4 @@ const FormCheckboxContainer = forwardRef(function (props, ref) {
 });
 FormCheckboxContainer.displayName = 'FormCheckboxContainer';
 
-export { FormControl, FormControlContainer, FormCheckbox, FormCheckboxContainer };
+export {FormControl, FormControlContainer, FormCheckbox, FormCheckboxContainer};

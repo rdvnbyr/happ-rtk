@@ -1,19 +1,14 @@
-import { Button,  Form, FormControl } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import {Button, Form, FormControl} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 export const Register = () => {
-
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     event.preventDefault();
   };
 
   return (
     <div className="row justify-content-center p-4">
-      <Form
-        onSubmit={handleSubmit}
-        style={{ maxWidth: '100%', width: '32rem' }}
-        className="border border-success p-4 rounded"
-      >
+      <Form onSubmit={handleSubmit} style={{maxWidth: '100%', width: '32rem'}} className="border border-success p-4 rounded">
         <div className="text-center mb-4">
           <h1 className="mb-4 text-success">Create Account</h1>
         </div>

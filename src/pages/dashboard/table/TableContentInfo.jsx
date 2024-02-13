@@ -1,10 +1,10 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { useDashboardContext } from '../context/dashboard-context';
+import {useDashboardContext} from '../context/dashboard-context';
 
 function TableContentInfo() {
   const dashboardContext = useDashboardContext();
-  const { showDialog, closeDialog, data } = dashboardContext;
+  const {showDialog, closeDialog, data} = dashboardContext;
   return (
     <>
       <Modal show={showDialog} onHide={closeDialog} backdrop="static" keyboard={false}>

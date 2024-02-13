@@ -1,13 +1,13 @@
-import { createContext, useCallback, useState, useContext } from 'react';
+import {createContext, useCallback, useState, useContext} from 'react';
 
 const DashboardContext = createContext(null);
 
-export const DashboardProvider = ({ children }) => {
+export const DashboardProvider = ({children}) => {
   const [data, setData] = useState(null);
 
   // modal state
   const [showDialog, setShowDialog] = useState(false);
-  const openDialog = useCallback((row) => {
+  const openDialog = useCallback(row => {
     setShowDialog(true);
     setData(row);
   }, []);

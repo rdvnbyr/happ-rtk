@@ -1,6 +1,1 @@
-export {
-  FormControl,
-  FormControlContainer,
-  FormCheckbox,
-  FormCheckboxContainer,
-} from './controls/FormControl';
+export {FormControl, FormControlContainer, FormCheckbox, FormCheckboxContainer} from './controls/FormControl';

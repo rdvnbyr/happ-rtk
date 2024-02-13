@@ -5,15 +5,15 @@ import '../../../assets/css/table.css';
 // A super simple expandable component.
 // const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
 
-import { data } from '../../../lib/mock-table-data';
-import { useDashboardContext } from '../context/dashboard-context';
+import {data} from '../../../lib/mock-table-data';
+import {useDashboardContext} from '../context/dashboard-context';
 
 export const ReactDataTable = () => {
-  const { openDialog } = useDashboardContext();
+  const {openDialog} = useDashboardContext();
   // data provides access to your row data
-  const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
+  const ExpandedComponent = ({data}) => <pre>{JSON.stringify(data, null, 2)}</pre>;
 
-  const handleChange = ({ selectedRows }) => {
+  const handleChange = ({selectedRows}) => {
     // You can set state or dispatch with something like Redux so we can use the retrieved data
     console.log('Selected Rows: ', selectedRows);
   };
@@ -27,7 +27,7 @@ export const ReactDataTable = () => {
       name: 'Director',
       selector: 'director',
       sortable: true,
-      cell: (d) => (
+      cell: d => (
         <a href="https://google.com" target="_blank" className="dlink" rel="noreferrer">
           {d.director}
         </a>
@@ -37,7 +37,7 @@ export const ReactDataTable = () => {
       name: 'Genres',
       selector: 'genres',
       sortable: true,
-      cell: (d) => <span>{d.genres.join(', ')}</span>,
+      cell: d => <span>{d.genres.join(', ')}</span>,
     },
     {
       name: 'Year',
@@ -48,12 +48,8 @@ export const ReactDataTable = () => {
       name: 'Action',
       sortable: false,
       selector: 'null',
-      cell: (row) => [
-        <button
-          key={`${row.title}3`}
-          onClick={() => openDialog(row)}
-          className="btn btn-sm btn-info"
-        >
+      cell: row => [
+        <button key={`${row.title}3`} onClick={() => openDialog(row)} className="btn btn-sm btn-info">
           Info
         </button>,
       ],
