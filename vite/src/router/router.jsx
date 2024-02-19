@@ -29,9 +29,9 @@ const BrowserRouter = createBrowserRouter([
   },
   {
     element: (
-      <MainLayout>
+      <AuthLayout>
         <Register />
-      </MainLayout>
+      </AuthLayout>
     ),
     path: '/register',
     errorElement: <MissingRoute />,

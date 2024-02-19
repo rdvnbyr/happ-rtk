@@ -5,6 +5,10 @@ import {Container} from 'react-bootstrap';
 import {Unauthorized} from '../components/Unauthorized';
 import {Navigate, useLocation} from 'react-router-dom';
 
+const RootLayout = ({children}) => {
+  return <Fragment>{children}</Fragment>;
+};
+
 const MainLayout = ({children}) => {
   const {isAuthenticated} = useSelector(state => state.auth);
   return (
@@ -33,4 +37,4 @@ const AuthLayout = ({children}) => {
   );
 };
 
-export {MainLayout, ProtectedLayout, AuthLayout};
+export {MainLayout, ProtectedLayout, AuthLayout, RootLayout};
