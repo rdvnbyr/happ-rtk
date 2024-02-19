@@ -9,11 +9,8 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <p id="index-page">
-      This is a demo for Remix.
-      <br />
-      Check out{" "}
-      <a href="https://remix.run">the docs at remix.run</a>.
-    </p>
+    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
+      <h1>TEST</h1>
+    </div>
   );
 }
